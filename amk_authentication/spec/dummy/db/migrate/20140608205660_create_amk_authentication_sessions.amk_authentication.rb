@@ -1,3 +1,4 @@
+# This migration comes from amk_authentication (originally 20140608015917)
 class CreateAmkAuthenticationSessions < ActiveRecord::Migration
   def change
     create_table :amk_authentication_sessions do |t|
