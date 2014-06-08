@@ -10,8 +10,8 @@ module AmkAuthentication
 
     def create
       @session_form = SessionForm.new session_params
-      if user = user_repository.find_by( email: session_params[:email] ) &&
-        @current_session = login( user ).with( session_params[:password] ) &&
+      if credential = credential_repository.find_by( email: session_params[:email] ) &&
+        @current_session = login( credential ).with( session_params[:password] ) &&
         current_session.logged_in?
         session[:session_id] = current_session.id
       else
@@ -25,12 +25,12 @@ module AmkAuthentication
     end
 
   private
-    def user_repository
-      AmkAuthentication::UserAccount
+    def credential_repository
+      AmkAuthentication::Credential
     end
 
-    def login( user )
-      SessionCreator.new( user , self )
+    def login( credential )
+      SessionCreator.new( credential , self )
     end
 
     def logout
