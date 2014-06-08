@@ -1,0 +1,17 @@
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+AmkAuthentication	lib/amk_authentication.rb	/^module AmkAuthentication$/;"	m
+AmkAuthentication	lib/amk_authentication/authenticator.rb	/^module AmkAuthentication$/;"	m
+Authenticator	lib/amk_authentication/authenticator.rb	/^  class Authenticator$/;"	c	class:AmkAuthentication
+authentic	lib/amk_authentication/authenticator.rb	/^    def self.authentic?( encrypted_password , plaintext_password , $/;"	F	class:AmkAuthentication.Authenticator
+authentic?	lib/amk_authentication/authenticator.rb	/^    def authentic?$/;"	f	class:AmkAuthentication.Authenticator
+initialize	lib/amk_authentication/authenticator.rb	/^    def initialize( hashed , plaintext , salt )$/;"	f	class:AmkAuthentication.Authenticator
+AmkAuthentication	lib/amk_authentication/version.rb	/^module AmkAuthentication$/;"	m
+ApplicationController	spec/dummy/app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationHelper	spec/dummy/app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+Application	spec/dummy/config/application.rb	/^  class Application < Rails::Application$/;"	c	class:Dummy
+Dummy	spec/dummy/config/application.rb	/^module Dummy$/;"	m
