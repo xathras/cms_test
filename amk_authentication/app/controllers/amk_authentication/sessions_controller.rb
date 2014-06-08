@@ -4,6 +4,7 @@ module AmkAuthentication
       if current_session.logged_in?
         redirect_to back_or_default
       end
+      session.delete( :session_id )
       @session_form = SessionForm.new
     end
 
@@ -30,6 +31,11 @@ module AmkAuthentication
 
     def login( user )
       SessionCreator.new( user , self )
+    end
+
+    def logout
+      current_session.update_attribute( :deleted_at , Time.now.utc )
+      session.delete( :session_id )
     end
   end
 end

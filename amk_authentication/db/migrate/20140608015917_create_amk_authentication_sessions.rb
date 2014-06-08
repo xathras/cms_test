@@ -10,5 +10,7 @@ class CreateAmkAuthenticationSessions < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :amk_authentication_sessions , :uuid
   end
 end

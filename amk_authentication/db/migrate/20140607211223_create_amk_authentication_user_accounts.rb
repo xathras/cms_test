@@ -8,5 +8,7 @@ class CreateAmkAuthenticationUserAccounts < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :amk_authentication_user_accounts , :email
   end
 end
