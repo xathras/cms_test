@@ -4,12 +4,12 @@ module AmkAuthentication
 
     helper_method :current_session
     def current_session
-      @current_session ||= Session.find_by( uuid: session[:session_id] ) || NullSession.new
+      @current_session ||= session_repository.find_by( uuid: session[:session_id] ) || NullSession.new
     end
 
-    helper_method: current_user
-    def current_user
-      @current_user ||= UserAccount.find_by( id: @current_session.user_id )
+    helper_method :current_credentials
+    def current_credentials
+      @current_credentials ||= credentials_repository.find_by( id: current_session.credentials_id )
     end
 
     def store_location
@@ -21,7 +21,20 @@ module AmkAuthentication
     end
 
     def default_path
-      send_public( AmkAuthentication::Engine.configuration.post_login_path )
+      AmkAuthentication::Engine.
+        configuration.
+        post_login_path.
+        to_s.split('.').reduce(self) { |obj, chain_link|
+          obj.send_public( chain_link )
+        }
+    end
+
+    def credentials_repository
+      Credentials
+    end
+
+    def session_repository
+      Session
     end
   end
 end

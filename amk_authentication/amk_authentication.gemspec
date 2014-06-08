@@ -7,9 +7,9 @@ require "amk_authentication/version"
 Gem::Specification.new do |s|
   s.name        = "amk_authentication"
   s.version     = AmkAuthentication::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
+  s.authors     = ["Andrew Kothmann"]
+  s.email       = ["andrew.kothmann@gmail.com"]
+  s.homepage    = "https://github.com/xathras/cms_test"
   s.summary     = "TODO: Summary of AmkAuthentication."
   s.description = "TODO: Description of AmkAuthentication."
   s.license     = "MIT"

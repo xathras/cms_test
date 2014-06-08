@@ -1,15 +1,15 @@
 module AmkAuthentication
   class SessionCreator
-    def initialize( user , context )
-      @hashed_password = user.hashed_password
-      @salt = user.password_salt
-      @user_id = user.id
+    def initialize( credentials , context )
+      @hashed_password = credentials.hashed_password
+      @salt = credentials.password_salt
+      @credentials_id = credentials.id
       @context = context
     end
 
     def with( password )
       if authentic?( password )
-        Session.create( user_id: @user_id ,
+        Session.create( credentials_id: @credentials_id ,
           ip_address: request.remote_addr,
           uuid: SecureRandom.uuid,
           user_agent: request.user_agent )
