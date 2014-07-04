@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Andrew Kothmann"]
   s.email       = ["andrew.kothmann@gmail.com"]
   s.homepage    = "https://github.com/xathras/cms_test"
-  s.summary     = "TODO: Summary of AmkAuthentication."
-  s.description = "TODO: Description of AmkAuthentication."
+  s.summary     = "Authentication for rails apps"
+  s.description = "Authentication for rails apps"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
