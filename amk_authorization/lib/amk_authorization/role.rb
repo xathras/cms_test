@@ -9,5 +9,9 @@ module AmkAuthorization
     def to_s
       @name.to_s
     end
+
+    def permitted_to?( permission_name )
+      @permissions.map(&:name).map(&:to_s).include?( permission_name.to_s )
+    end
   end
 end

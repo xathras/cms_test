@@ -17,4 +17,18 @@ describe AmkAuthorization::Role do
     expect( role.permissions ).not_to be_nil
     expect( role.permissions ).to be_empty
   end
+
+  it 'should be permitted to one of its permissions' do
+    role = AmkAuthorization::Role.new( :admin )
+    role.permissions.push( double( 'Permission' , name: :view_events ) )
+
+    expect( role ).to be_permitted_to( :view_events )
+  end
+
+  it 'should not be permitted to do something thats not in the permission list' do
+    role = AmkAuthorization::Role.new( :admin )
+    role.permissions.push( double( 'Permission' , name: :view_events ) )
+
+    expect( role ).not_to be_permitted_to( :create_events )
+  end
 end
