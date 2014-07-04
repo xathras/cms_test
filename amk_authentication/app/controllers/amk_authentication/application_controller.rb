@@ -21,12 +21,17 @@ module AmkAuthentication
     end
 
     def default_path
-      AmkAuthentication::Engine.
+      post_login_path = AmkAuthentication::Engine.
         configuration.
         post_login_path.
-        to_s.split('.').reduce(self) { |obj, chain_link|
-          obj.send_public( chain_link )
-        }
+        to_s
+      unless post_login_path =~ /\//
+        post_login_path.split('.').reduce(self) { |obj, chain_link|
+            obj.send( chain_link )
+          }
+      else
+        post_login_path
+      end
     end
 
     def credentials_repository

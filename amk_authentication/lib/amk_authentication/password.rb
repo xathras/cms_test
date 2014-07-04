@@ -1,7 +1,7 @@
 module AmkAuthentication
   class Password
     def self.hash( plaintext , salt = 'salt' , cost = 10 )
-      new( plaintext , salt , cost ).encrypt
+      new( plaintext , salt , cost ).hash
     end
 
     def initialize( plaintext , salt , cost )

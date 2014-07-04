@@ -10,12 +10,22 @@ module AmkAuthentication
 
     def create
       @session_form = SessionForm.new session_params
-      if credential = credential_repository.find_by( email: session_params[:email] ) &&
-        @current_session = login( credential ).with( session_params[:password] ) &&
+      (credential = credential_repository.find_by( email: session_params[:email] ))
+      if credential &&
+        (@current_session = login( credential ).with( session_params[:password] )) &&
         current_session.logged_in?
         session[:session_id] = current_session.id
+        respond_to do |wants|
+          wants.html { redirect_to back_or_default }
+          wants.json do
+            render json: { session_id: current_session.id }, status: :ok
+          end
+        end
       else
-        render action: 'new'
+        respond_to do |wants|
+          wants.html { render action: 'new' }
+          wants.json { status :not_authorized }
+        end
       end
     end
 
@@ -36,6 +46,10 @@ module AmkAuthentication
     def logout
       current_session.update_attribute( :deleted_at , Time.now.utc )
       session.delete( :session_id )
+    end
+
+    def session_params
+      @session_params = params.require( :session ).permit( :email, :password )
     end
   end
 end
