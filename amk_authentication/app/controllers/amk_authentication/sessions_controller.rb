@@ -9,20 +9,18 @@ module AmkAuthentication
     end
 
     def create
-      @session_form = SessionForm.new session_params
-      (credential = credential_repository.find_by( email: session_params[:email] ))
-      if credential && 
-        login( credential ).with( session_params[:password] ).succeeded?
-        @current_session = @login.session
-        session[:session_id] = current_session.id
-        respond_to do |wants|
+      respond_to do |wants|
+        @session_form = SessionForm.new session_params
+        credential = credential_repository.find_by( email: session_params[:email] )
+        if credential && 
+          login( credential ).with( session_params[:password] ).succeeded?
+          @current_session = @login.session
+          session[:session_id] = current_session.id
           wants.html { redirect_to back_or_default }
           wants.json do
             render json: { session_id: current_session.id }, status: :ok
           end
-        end
-      else
-        respond_to do |wants|
+        else
           wants.html { render action: 'new' }
           wants.json { status :not_authorized }
         end
