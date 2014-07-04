@@ -11,9 +11,9 @@ module AmkAuthentication
     def create
       @session_form = SessionForm.new session_params
       (credential = credential_repository.find_by( email: session_params[:email] ))
-      if credential &&
-        (@current_session = login( credential ).with( session_params[:password] )) &&
-        current_session.logged_in?
+      if credential && 
+        login( credential ).with( session_params[:password] ).succeeded?
+        @current_session = @login.session
         session[:session_id] = current_session.id
         respond_to do |wants|
           wants.html { redirect_to back_or_default }
@@ -40,7 +40,7 @@ module AmkAuthentication
     end
 
     def login( credential )
-      SessionCreator.new( credential , self )
+      @login ||= SessionCreator.new( credential , self.request )
     end
 
     def logout

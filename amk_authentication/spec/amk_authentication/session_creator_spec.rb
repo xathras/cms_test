@@ -7,11 +7,9 @@ describe AmkAuthentication::SessionCreator do
         hashed_password: valid_password_hash,
         password_salt: 'salt',
         id: 1 ),
-      double( 'Context' , 
-        request: double( 'Request' , remote_addr: '100' , user_agent: 'test' ))
-      )
+      double( 'Request' , remote_addr: '100' , user_agent: 'test' ))
 
-    expect( object.with( 'plaintext' ) ).to be_logged_in
+    expect( object.with( 'plaintext' ) ).to be_succeeded
   end
 
   it 'should provide an unlogged in session if the credentials are incorrect' do
@@ -20,10 +18,8 @@ describe AmkAuthentication::SessionCreator do
         hashed_password: invalid_password_hash,
         password_salt: 'salt',
         id: 1 ),
-      double( 'Context' , 
-        request: double( 'Request' , remote_addr: '100' , user_agent: 'test' ))
-      )
+      double( 'Request' , remote_addr: '100' , user_agent: 'test' ))
 
-    expect( object.with( 'plaintext' ) ).not_to be_logged_in
+    expect( object.with( 'plaintext' ) ).not_to be_succeeded
   end
 end
