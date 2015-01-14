@@ -6,8 +6,7 @@ module AmkAuthorization
   load 'amk_authorization/roles.rb'
   load 'amk_authorization/permission.rb'
   load 'amk_authorization/permissions.rb'
-  load 'amk_authorization/builder.rb'
-  load 'amk_authorization/role_proxy.rb'
+  load 'amk_authorization/configuration.rb'
   load 'amk_authorization/statements.rb'
 
   def self.roles
@@ -19,7 +18,7 @@ module AmkAuthorization
   end
 
   def self.build( &block )
-    Builder.new.instance_eval( &block )
+    Configuration::Builder.new.instance_eval( &block )
   end
 
   def self.authorize( role_name: nil )
