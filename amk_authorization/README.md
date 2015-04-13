@@ -18,7 +18,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    AmkAuthorization.configure do
+      role :admin do
+        right :create_user
+      end
+    end
+
+    permit( subject ).to( verb ).on( object )
+
+    permit( subject ).to( verb ).on!( object )
+    # raises NotPermitted exception
+
+    permit( user ).to( :create ).on( new_user )
+
+    class User
+      def permit?( subject, verb )
+      end
+    end
+
+    permit( user ).to( :view ).or( :create ).on( )
 
 ## Contributing
 
